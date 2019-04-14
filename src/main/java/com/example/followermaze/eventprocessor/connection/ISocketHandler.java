@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public interface ISocketHandler {
     void handleIO();
-    Consumer<String> getConsumer();
+//    Consumer<String> getConsumer();
     void setConsumer(Consumer<String> consumer);
     void setSocket(Socket socket);
 }

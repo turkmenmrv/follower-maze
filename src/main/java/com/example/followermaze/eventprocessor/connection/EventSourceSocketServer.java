@@ -15,7 +15,6 @@ public class EventSourceSocketServer implements ISocketServer {
                 eventReader.setConsumer(consumer);
 
                 eventReader.setSocket(socket);
-                System.out.println("accepted event source");
                 eventReader.handleIO();
             }
         }

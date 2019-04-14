@@ -8,6 +8,8 @@ import com.example.followermaze.eventprocessor.message.MessageHeap;
 import com.example.followermaze.eventprocessor.parser.IParser;
 import com.example.followermaze.eventprocessor.parser.Parser;
 import com.example.followermaze.eventprocessor.strategy.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 public class EventSourceController {
     private IParser parser = new Parser();
     private ISocketServer eventSocketServer = new EventSourceSocketServer();
+    private Logger logger = LoggerFactory.getLogger(EventSourceController.class);
 
     public void startController(){
 
@@ -22,14 +25,9 @@ public class EventSourceController {
             try {
                 eventSocketServer.startListener(Utils.getEventSourcePort(), this::processMessage);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Error in starting Event Source listener",e);
             }
         }).start();
-//        try {
-//            TimeUnit.SECONDS.sleep(20);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 
 

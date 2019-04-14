@@ -3,6 +3,8 @@ package com.example.followermaze.eventprocessor.connection;
 import com.example.followermaze.eventprocessor.message.Message;
 import com.example.followermaze.eventprocessor.user.UserId;
 import com.example.followermaze.eventprocessor.user.UserMessages;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,14 +15,14 @@ import java.util.function.Consumer;
 public class UserClientHandler implements ISocketHandler {
     private Socket socket;
     private Consumer<String> consumer;
+    private Logger logger = LoggerFactory.getLogger(UserClientHandler.class);
+
 
     @Override
     public  void handleIO() {
         String userClientId = null;
         try {
-            BufferedReader in =
-                    new BufferedReader(
-                            new InputStreamReader(socket.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             userClientId  = in.readLine() ;
             if(userClientId != null) {
@@ -34,8 +36,6 @@ public class UserClientHandler implements ISocketHandler {
                             pw.println(payload);
                             pw.flush();
                         }
-                        else
-                            System.out.println("message is null");
                     }
                     else
                         Thread.sleep(1000);
@@ -46,14 +46,14 @@ public class UserClientHandler implements ISocketHandler {
             if(userClientId != null && !userClientId.isEmpty()){
                 UserMessages.invalidateUser(userClientId);
             }
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
     }
-
-    @Override
-    public Consumer<String> getConsumer() {
-        return consumer;
-    }
+//
+//    @Override
+//    public Consumer<String> getConsumer() {
+//        return consumer;
+//    }
 
     @Override
     public void setConsumer(final Consumer<String> consumer) {
