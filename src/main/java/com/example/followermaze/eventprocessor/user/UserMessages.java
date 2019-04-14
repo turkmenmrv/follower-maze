@@ -54,9 +54,9 @@ public class UserMessages {
     }
 
 
-    public static void invalidateUser(String userId){
-        UserId id = new UserId(Integer.valueOf(userId));
-        if(id.getKey() > 0 && userMessageQueue.containsKey(userId)){
+    public static void invalidateUser(String userIdstr){
+        UserId userId = new UserId(Integer.valueOf(userIdstr));
+        if(userId.getKey() > 0 && userMessageQueue.containsKey(userId)){
             userMessageQueue.remove(userId);
         }
     }

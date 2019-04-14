@@ -10,10 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PrivateNotificationTest {
+class StatusUpdateNotificationTest {
     private static UserId user1 = new UserId(10);
     private static UserId user2 = new UserId(20);
-    private static Message message = new Message(1, MessageType.PRIVATEMESSAGE, user1, user2, "1|P|10|20");
+    private static Message message1 = new Message(1, MessageType.FOLLOW, user1, user2, "1|F|10|20");
+    private static Message message2 = new Message(1, MessageType.STATUSUPDATE, user2, new UserId(-1), "2|S|20");
 
     @BeforeAll
     public static void setUp(){
@@ -21,14 +22,15 @@ class PrivateNotificationTest {
         FollowerCache.clearFollowerCache();
         UserMessages.validateUser(user1);
         UserMessages.validateUser(user2);
+        NotificationStrategy followNotification = NotificationStrategy.getNotification(message1.getType());
+        followNotification.createNotification(message1);
     }
 
     @Test
     void createNotification() {
-        NotificationStrategy privateStrategy = NotificationStrategy.getNotification(message.getType());
-        assertEquals(privateStrategy.getClass(), PrivateNotification.class, "Strategy should be Private");
-        privateStrategy.createNotification(message);
-        assertNull(UserMessages.pollMessage(user1), "There should be no message for User1");
-        assertEquals(UserMessages.pollMessage(user2), message, "Message is not in the queue for user2");
+        NotificationStrategy statusUpdateNotification = NotificationStrategy.getNotification(message2.getType());
+        assertEquals(statusUpdateNotification.getClass(), StatusUpdateNotification.class, "Strategy should be StatusUpdate");
+        statusUpdateNotification.createNotification(message2);
+        assertEquals(UserMessages.pollMessage(user1), message2,"There should be no message for User1");
     }
 }
