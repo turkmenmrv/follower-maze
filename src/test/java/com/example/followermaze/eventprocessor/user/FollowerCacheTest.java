@@ -14,26 +14,26 @@ class FollowerCacheTest {
 
     @BeforeEach
     public void setUp(){
-        FollowerCache.clearFollowerCache();
+        FollowerCache.getInstance().clearFollowerCache();
     }
 
     @Test
     void followUser() {
-        FollowerCache.followUser(user1, user2);
-        FollowerCache.followUser(user1, user3);
+        FollowerCache.getInstance().followUser(user1, user2);
+        FollowerCache.getInstance().followUser(user1, user3);
 
-        assertEquals(FollowerCache.getFollowers(user1).size(), 2 , "FollowerCache size is wrong");
-        assertEquals(FollowerCache.getFollowers(user1).containsAll(Arrays.asList(user2, user3)), true, "FollowerCache is wrong");
+        assertEquals(FollowerCache.getInstance().getFollowers(user1).size(), 2 , "FollowerCache size is wrong");
+        assertEquals(FollowerCache.getInstance().getFollowers(user1).containsAll(Arrays.asList(user2, user3)), true, "FollowerCache is wrong");
     }
 
 
     @Test
     void unfollowUser() {
-        FollowerCache.followUser(user1, user2);
-        assertEquals(FollowerCache.getFollowers(user1).size(), 1 , "FollowerCache size is wrong");
+        FollowerCache.getInstance().followUser(user1, user2);
+        assertEquals(FollowerCache.getInstance().getFollowers(user1).size(), 1 , "FollowerCache size is wrong");
 
-        FollowerCache.unfollowUser(user1, user2);
-        assertEquals(FollowerCache.getFollowers(user1).isEmpty() ,true ,"FollowerCache size is wrong");
+        FollowerCache.getInstance().unfollowUser(user1, user2);
+        assertEquals(FollowerCache.getInstance().getFollowers(user1).isEmpty() ,true ,"FollowerCache size is wrong");
 
     }
 }

@@ -4,7 +4,7 @@ import com.example.followermaze.eventprocessor.message.Message;
 import com.example.followermaze.eventprocessor.message.MessageType;
 import com.example.followermaze.eventprocessor.user.FollowerCache;
 import com.example.followermaze.eventprocessor.user.UserId;
-import com.example.followermaze.eventprocessor.user.UserMessages;
+import com.example.followermaze.eventprocessor.user.UserMessagesQueue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +17,10 @@ class FollowNotificationTest {
 
     @BeforeAll
     public static void setUp(){
-        UserMessages.clearUserMessages();
-        FollowerCache.clearFollowerCache();
-        UserMessages.validateUser(user1);
-        UserMessages.validateUser(user2);
+        UserMessagesQueue.getInstance().clearUserMessages();
+        FollowerCache.getInstance().clearFollowerCache();
+        UserMessagesQueue.getInstance().validateUser(user1);
+        UserMessagesQueue.getInstance().validateUser(user2);
     }
 
     @Test
@@ -28,8 +28,8 @@ class FollowNotificationTest {
         NotificationStrategy followStrategy = NotificationStrategy.getNotification(message.getType());
         assertEquals(followStrategy.getClass(), FollowNotification.class, "Strategy should be Follow");
         followStrategy.createNotification(message);
-        assertNull(UserMessages.pollMessage(user1), "There should be no message for User1");
-        assertEquals(UserMessages.pollMessage(user2), message, "Message is not in the queue for user2");
-        assertEquals(FollowerCache.getFollowers(user2).contains(user1), true, "Follower cache is invalid");
+        assertNull(UserMessagesQueue.getInstance().pollMessage(user1), "There should be no message for User1");
+        assertEquals(UserMessagesQueue.getInstance().pollMessage(user2), message, "Message is not in the queue for user2");
+        assertEquals(FollowerCache.getInstance().getFollowers(user2).contains(user1), true, "Follower cache is invalid");
     }
 }

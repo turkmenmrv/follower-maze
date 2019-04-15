@@ -36,11 +36,11 @@ public class EventSourceController {
         List<Message> messageList = parser.createMessage(messageChunk);
 
         for(Message message : messageList){
-            MessageHeap.addMessage(message);
+            MessageHeap.getInstance().addMessage(message);
         }
 
-        while(!MessageHeap.isEmpty()){
-            Message message = MessageHeap.getNextOrderedMessage();
+        while(!MessageHeap.getInstance().isEmpty()){
+            Message message = MessageHeap.getInstance().getNextOrderedMessage();
             NotificationStrategy.getNotification(message.getType()).createNotification(message);
         }
 

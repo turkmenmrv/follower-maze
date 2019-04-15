@@ -7,6 +7,6 @@ public class UnfollowNotification implements NotificationStrategy {
 
     @Override
     public void createNotification(Message message) {
-        FollowerCache.unfollowUser(message.getToUserId(), message.getFromUserId());
+        FollowerCache.getInstance().unfollowUser(message.getToUserId(), message.getFromUserId());
     }
 }

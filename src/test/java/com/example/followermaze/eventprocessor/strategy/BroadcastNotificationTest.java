@@ -4,7 +4,7 @@ import com.example.followermaze.eventprocessor.message.Message;
 import com.example.followermaze.eventprocessor.message.MessageType;
 import com.example.followermaze.eventprocessor.user.FollowerCache;
 import com.example.followermaze.eventprocessor.user.UserId;
-import com.example.followermaze.eventprocessor.user.UserMessages;
+import com.example.followermaze.eventprocessor.user.UserMessagesQueue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +17,10 @@ class BroadcastNotificationTest {
 
     @BeforeAll
     public static void setUp(){
-        UserMessages.clearUserMessages();
-        FollowerCache.clearFollowerCache();
-        UserMessages.validateUser(user1);
-        UserMessages.validateUser(user2);
+        UserMessagesQueue.getInstance().clearUserMessages();
+        FollowerCache.getInstance().clearFollowerCache();
+        UserMessagesQueue.getInstance().validateUser(user1);
+        UserMessagesQueue.getInstance().validateUser(user2);
     }
 
     @Test
@@ -28,7 +28,7 @@ class BroadcastNotificationTest {
         NotificationStrategy broadcastStrategy = NotificationStrategy.getNotification(message.getType());
         assertEquals(broadcastStrategy.getClass(), BroadcastNotification.class, "Strategy should be Broadcast");
         broadcastStrategy.createNotification(message);
-        assertEquals(UserMessages.pollMessage(user1), message, "Message is not in the queue for user1");
-        assertEquals(UserMessages.pollMessage(user2), message, "Message is not in the queue for user2");
+        assertEquals(UserMessagesQueue.getInstance().pollMessage(user1), message, "Message is not in the queue for user1");
+        assertEquals(UserMessagesQueue.getInstance().pollMessage(user2), message, "Message is not in the queue for user2");
     }
 }

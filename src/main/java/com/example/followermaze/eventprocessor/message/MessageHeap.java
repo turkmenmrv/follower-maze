@@ -4,29 +4,32 @@ import java.util.PriorityQueue;
 
 public class MessageHeap {
 
-    private static final PriorityQueue<Message> messageBuffer;
+    private final PriorityQueue<Message> messageBuffer =new PriorityQueue<Message>(new MessageComparator());
+    private static MessageHeap instance = new MessageHeap();
 
-    static {
-        messageBuffer = new PriorityQueue<Message>(new MessageComparator());
+    private MessageHeap(){}
+
+    public static MessageHeap getInstance(){
+        return instance;
     }
 
-    public static void addMessage(Message message){
+    public void addMessage(Message message){
         messageBuffer.add(message);
     }
 
-    public static Message getNextOrderedMessage(){
+    public Message getNextOrderedMessage(){
         return messageBuffer.poll();
     }
 
-    public static boolean isEmpty(){
+    public boolean isEmpty(){
         return messageBuffer.isEmpty();
     }
 
-    public static void clearMessageHeap(){
+    public void clearMessageHeap(){
         messageBuffer.clear();
     }
 
-    public static int getMessageHeapSize(){
+    public int getMessageHeapSize(){
         return messageBuffer.size();
     }
 }

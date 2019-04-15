@@ -1,11 +1,10 @@
 package com.example.followermaze.eventprocessor.controller;
 
 import com.example.followermaze.eventprocessor.Utils;
-import com.example.followermaze.eventprocessor.connection.ISocketHandler;
 import com.example.followermaze.eventprocessor.connection.ISocketServer;
 import com.example.followermaze.eventprocessor.connection.UserClientSocketServer;
 import com.example.followermaze.eventprocessor.user.UserId;
-import com.example.followermaze.eventprocessor.user.UserMessages;
+import com.example.followermaze.eventprocessor.user.UserMessagesQueue;
 
 import java.io.IOException;
 
@@ -24,6 +23,6 @@ public class UserClientController {
 
     public void processUser(String id){
         UserId userId = new UserId(Integer.valueOf(id));
-        UserMessages.validateUser(userId);
+        UserMessagesQueue.getInstance().validateUser(userId);
     }
 }

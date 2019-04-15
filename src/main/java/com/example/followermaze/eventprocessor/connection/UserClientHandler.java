@@ -2,7 +2,7 @@ package com.example.followermaze.eventprocessor.connection;
 
 import com.example.followermaze.eventprocessor.message.Message;
 import com.example.followermaze.eventprocessor.user.UserId;
-import com.example.followermaze.eventprocessor.user.UserMessages;
+import com.example.followermaze.eventprocessor.user.UserMessagesQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,8 +28,8 @@ public class UserClientHandler implements ISocketHandler {
             if(userClientId != null) {
                 consumer.accept(userClientId);
                 while (true) {
-                    if (UserMessages.containsMessageForUser(userClientId)) {
-                        Message message = UserMessages.pollMessage(new UserId(Integer.valueOf(userClientId)));
+                    if (UserMessagesQueue.getInstance().containsMessageForUser(userClientId)) {
+                        Message message = UserMessagesQueue.getInstance().pollMessage(new UserId(Integer.valueOf(userClientId)));
                         if(message != null){
                             String payload = message.getPayload();
                             PrintWriter pw = new PrintWriter(socket.getOutputStream());
@@ -44,7 +44,7 @@ public class UserClientHandler implements ISocketHandler {
 
         } catch (Exception e) {//TODO: catch specific exception type
             if(userClientId != null && !userClientId.isEmpty()){
-                UserMessages.invalidateUser(userClientId);
+                UserMessagesQueue.getInstance().invalidateUser(userClientId);
             }
             logger.error(e.getMessage(),e);
         }

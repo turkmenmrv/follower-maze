@@ -7,13 +7,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class FollowerCache {
-    private static final ConcurrentMap<UserId, List<UserId>> followersMap;
+    private static final FollowerCache instance = new FollowerCache();
+    private final ConcurrentMap<UserId, List<UserId>> followersMap =  new ConcurrentHashMap<>();
 
-    static{
-        followersMap = new ConcurrentHashMap<>();
+    private FollowerCache(){}
+
+    public static FollowerCache getInstance(){
+        return instance;
     }
 
-    public static void followUser(UserId followed, UserId follower){
+    public void followUser(UserId followed, UserId follower){
         if(followersMap.containsKey(followed)){
             List<UserId> list = followersMap.get(followed);
             list.add(follower);
@@ -25,18 +28,18 @@ public class FollowerCache {
         }
     }
 
-    public static void unfollowUser(UserId followed, UserId follower){
+    public void unfollowUser(UserId followed, UserId follower){
         if(followersMap.containsKey(followed)){
             List<UserId> list = followersMap.get(followed);
             list.remove(follower);
         }
     }
 
-    public static List<UserId> getFollowers(UserId userId){
+    public List<UserId> getFollowers(UserId userId){
         return followersMap.getOrDefault(userId, Collections.emptyList());
     }
 
-    public static void clearFollowerCache(){
+    public void clearFollowerCache(){
         followersMap.clear();
     }
 }
