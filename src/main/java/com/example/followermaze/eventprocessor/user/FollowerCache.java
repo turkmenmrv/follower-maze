@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class FollowerCache {
-    private static ConcurrentMap<UserId, List<UserId>> followersMap;
+    private static final ConcurrentMap<UserId, List<UserId>> followersMap;
 
     static{
         followersMap = new ConcurrentHashMap<>();

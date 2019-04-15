@@ -10,7 +10,7 @@ import com.example.followermaze.eventprocessor.user.UserMessages;
 import java.io.IOException;
 
 public class UserClientController {
-    private ISocketServer userSocketServer = new UserClientSocketServer();
+    private final ISocketServer userSocketServer = new UserClientSocketServer();
 
     public void startController() {
         new Thread(()->{

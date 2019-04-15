@@ -1,7 +1,7 @@
 package com.example.followermaze.eventprocessor.user;
 
 public class UserId {
-    private int key;
+    private final int key;
 
     public UserId(int key){
         this.key = key;

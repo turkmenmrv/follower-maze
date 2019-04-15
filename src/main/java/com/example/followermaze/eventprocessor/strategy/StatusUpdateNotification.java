@@ -10,7 +10,7 @@ import java.util.List;
 public class StatusUpdateNotification implements NotificationStrategy {
 
     @Override
-    public void createNotification(final Message message) {
+    public void createNotification(Message message) {
         List<UserId> followers = FollowerCache.getFollowers(message.getFromUserId());
         for(UserId id : followers){
             UserMessages.insertMessage(id, message);

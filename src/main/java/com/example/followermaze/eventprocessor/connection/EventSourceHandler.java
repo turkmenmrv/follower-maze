@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class EventSourceHandler implements ISocketHandler {
   private Socket socket;
   private Consumer<String> consumer;
-  private Logger logger = LoggerFactory.getLogger(EventSourceHandler.class);
+  private final Logger logger = LoggerFactory.getLogger(EventSourceHandler.class);
 
   @Override
   public void handleIO() {
@@ -46,12 +46,12 @@ public class EventSourceHandler implements ISocketHandler {
 //  }
 
   @Override
-  public void setConsumer(final Consumer<String> consumer) {
+  public void setConsumer(Consumer<String> consumer) {
     this.consumer = consumer;
   }
 
   @Override
-  public void setSocket(final Socket socket) {
+  public void setSocket(Socket socket) {
     this.socket = socket;
   }
 }

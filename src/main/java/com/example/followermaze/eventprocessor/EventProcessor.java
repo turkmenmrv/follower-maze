@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EventProcessor {
-    private EventSourceController eventSourceController;
-    private UserClientController userClientController;
+    private final EventSourceController eventSourceController;
+    private final UserClientController userClientController;
     private static final Logger logger = LoggerFactory.getLogger(EventProcessor.class);
 
     public EventProcessor(){

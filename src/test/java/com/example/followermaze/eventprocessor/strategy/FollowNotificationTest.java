@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FollowNotificationTest {
-    private static UserId user1 = new UserId(10);
-    private static UserId user2 = new UserId(20);
-    private static Message message = new Message(1, MessageType.FOLLOW, user1, user2, "1|F|10|20");
+    private static final UserId user1 = new UserId(10);
+    private static final UserId user2 = new UserId(20);
+    private static final Message message = new Message(1, MessageType.FOLLOW, user1, user2, "1|F|10|20");
 
     @BeforeAll
     public static void setUp(){

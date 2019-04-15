@@ -6,7 +6,7 @@ import com.example.followermaze.eventprocessor.user.UserMessages;
 public class PrivateNotification implements NotificationStrategy {
 
     @Override
-    public void createNotification(final Message message) {
+    public void createNotification(Message message) {
         UserMessages.insertMessage(message.getToUserId(), message);
     }
 }

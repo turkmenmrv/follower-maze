@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserIdTest {
-    private static int key1 = 1;
-    private static int key2 = 2;
-    private static UserId id1_val1 = new UserId(key1);
-    private static UserId id2_val1 = new UserId(key1);
-    private static UserId id3_val2 = new UserId(key2);
+    private static final int key1 = 1;
+    private static final int key2 = 2;
+    private static final UserId id1_val1 = new UserId(key1);
+    private static final UserId id2_val1 = new UserId(key1);
+    private static final UserId id3_val2 = new UserId(key2);
 
 
     @Test

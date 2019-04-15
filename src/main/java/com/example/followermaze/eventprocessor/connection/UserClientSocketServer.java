@@ -11,7 +11,7 @@ public class UserClientSocketServer implements ISocketServer {
     ExecutorService executorService = Executors.newCachedThreadPool();
 
     @Override
-    public void startListener(final int port, final Consumer<String> consumer) throws IOException {
+    public void startListener(int port, Consumer<String> consumer) throws IOException {
         try (ServerSocket ss = new ServerSocket(port)) {
             while(true){
 

@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class UserMessages {
-    private static ConcurrentMap<UserId, Queue<Message>> userMessageQueue;
+    private static final ConcurrentMap<UserId, Queue<Message>> userMessageQueue;
 
     static{
         userMessageQueue = new ConcurrentHashMap<>();

@@ -3,11 +3,11 @@ package com.example.followermaze.eventprocessor.message;
 import com.example.followermaze.eventprocessor.user.UserId;
 
 public class Message {
-    private long sequence;
-    private MessageType type;
-    private UserId fromUserId;
-    private UserId toUserId;
-    private String payload;
+    private final long sequence;
+    private final MessageType type;
+    private final UserId fromUserId;
+    private final UserId toUserId;
+    private final String payload;
 
     public Message(long sequence, MessageType type, UserId fromUserId, UserId toUserId, String payload){
         this.sequence = sequence;

@@ -8,9 +8,9 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FollowerCacheTest {
-    private static UserId user1 = new UserId(10);
-    private static UserId user2 = new UserId(20);
-    private static UserId user3 = new UserId(30);
+    private static final UserId user1 = new UserId(10);
+    private static final UserId user2 = new UserId(20);
+    private static final UserId user3 = new UserId(30);
 
     @BeforeEach
     public void setUp(){

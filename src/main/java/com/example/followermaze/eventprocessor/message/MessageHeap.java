@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 
 public class MessageHeap {
 
-    private static PriorityQueue<Message> messageBuffer;
+    private static final PriorityQueue<Message> messageBuffer;
 
     static {
         messageBuffer = new PriorityQueue<Message>(new MessageComparator());
@@ -34,7 +34,7 @@ public class MessageHeap {
 class MessageComparator implements java.util.Comparator<Message> {
 
     @Override
-    public int compare(final Message m1, final Message m2) {
+    public int compare(Message m1, Message m2) {
         return Long.compare(m1.getSequence(), m2.getSequence());
     }
 }

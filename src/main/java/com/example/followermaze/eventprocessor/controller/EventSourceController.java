@@ -15,9 +15,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class EventSourceController {
-    private IParser parser = new Parser();
-    private ISocketServer eventSocketServer = new EventSourceSocketServer();
-    private Logger logger = LoggerFactory.getLogger(EventSourceController.class);
+    private final IParser parser = new Parser();
+    private final ISocketServer eventSocketServer = new EventSourceSocketServer();
+    private final Logger logger = LoggerFactory.getLogger(EventSourceController.class);
 
     public void startController(){
 

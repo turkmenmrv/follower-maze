@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BroadcastNotificationTest {
-    private static UserId user1 = new UserId(10);
-    private static UserId user2 = new UserId(20);
-    private static Message message = new Message(3, MessageType.BROADCAST, new UserId(-1), new UserId(-1), "3|B");
+    private static final UserId user1 = new UserId(10);
+    private static final UserId user2 = new UserId(20);
+    private static final Message message = new Message(3, MessageType.BROADCAST, new UserId(-1), new UserId(-1), "3|B");
 
     @BeforeAll
     public static void setUp(){

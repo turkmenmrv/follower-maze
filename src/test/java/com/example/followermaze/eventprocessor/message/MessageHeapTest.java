@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MessageHeapTest {
-    private static Message message1 = new Message(1, MessageType.FOLLOW, new UserId(10), new UserId(20), "1|F|10|20");
-    private static Message message2 = new Message(2, MessageType.UNFOLLOW, new UserId(10), new UserId(20), "2|U|10|20");
-    private static Message message3 = new Message(3, MessageType.BROADCAST, new UserId(-1), new UserId(-1), "3|B");
+    private static final Message message1 = new Message(1, MessageType.FOLLOW, new UserId(10), new UserId(20), "1|F|10|20");
+    private static final Message message2 = new Message(2, MessageType.UNFOLLOW, new UserId(10), new UserId(20), "2|U|10|20");
+    private static final Message message3 = new Message(3, MessageType.BROADCAST, new UserId(-1), new UserId(-1), "3|B");
 
     @BeforeEach
     void setUp() {
