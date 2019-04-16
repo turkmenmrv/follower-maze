@@ -49,11 +49,6 @@ public class UserClientHandler implements ISocketHandler {
             logger.error(e.getMessage(),e);
         }
     }
-//
-//    @Override
-//    public Consumer<String> getConsumer() {
-//        return consumer;
-//    }
 
     @Override
     public void setConsumer(Consumer<String> consumer) {

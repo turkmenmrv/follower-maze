@@ -1,5 +1,7 @@
 package com.example.followermaze.eventprocessor.message;
 
+import com.example.followermaze.eventprocessor.Utils;
+
 import java.util.PriorityQueue;
 
 public class MessageHeap {
@@ -31,6 +33,10 @@ public class MessageHeap {
 
     public int getMessageHeapSize(){
         return messageBuffer.size();
+    }
+
+    public boolean isSafeToPoll(){
+        return messageBuffer.size()> Utils.getMaxEventSourceBatchSize();
     }
 }
 

@@ -10,6 +10,11 @@ import java.io.IOException;
 
 public class UserClientController {
     private final ISocketServer userSocketServer = new UserClientSocketServer();
+    private final UserMessagesQueue userMessagesQueue;
+
+    public UserClientController(UserMessagesQueue userMessagesQueue) {
+        this.userMessagesQueue = userMessagesQueue;
+    }
 
     public void startController() {
         new Thread(()->{
@@ -23,6 +28,6 @@ public class UserClientController {
 
     public void processUser(String id){
         UserId userId = new UserId(Integer.valueOf(id));
-        UserMessagesQueue.getInstance().validateUser(userId);
+        userMessagesQueue.validateUser(userId);
     }
 }

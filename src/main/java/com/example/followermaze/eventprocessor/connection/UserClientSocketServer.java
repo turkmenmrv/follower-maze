@@ -1,5 +1,7 @@
 package com.example.followermaze.eventprocessor.connection;
 
+import com.example.followermaze.eventprocessor.Utils;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,7 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 public class UserClientSocketServer implements ISocketServer {
-    ExecutorService executorService = Executors.newCachedThreadPool();
+    private final ExecutorService executorService = Executors.newFixedThreadPool(Utils.getConcurrencyLevel());
 
     @Override
     public void startListener(int port, Consumer<String> consumer) throws IOException {
@@ -19,11 +21,12 @@ public class UserClientSocketServer implements ISocketServer {
                 ISocketHandler userReader = new UserClientHandler();
                 userReader.setConsumer(consumer);
                 userReader.setSocket(socket);
-//                UserClientHandler reader = new UserClientHandler(socket);
-//                    reader.handleIO();
                 executorService.submit(()->{
                     userReader.handleIO();});
             }
+        }
+        finally {
+            executorService.shutdown();
         }
     }
 }
