@@ -18,17 +18,12 @@ public class UserMessagesQueue {
         return instance;
     }
 
-    public void insertMessage(UserId userId, Message message){
-        if(messageQueue.containsKey(userId)){
+    public void insertMessage(UserId userId, Message message) {
+        if (messageQueue.containsKey(userId)) {
             Queue<Message> queue = messageQueue.get(userId);
             queue.add(message);
         }
-        //TODO: log
-//        else{
-//            Queue<message> messageQueue = new LinkedList<>();
-//            messageQueue.add(message);
-//            messageQueue.put(userId, messageQueue);
-//        }
+        //else: ignore message
     }
 
     public void insertMessageToAll(Message message){

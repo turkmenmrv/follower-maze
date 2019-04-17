@@ -43,8 +43,12 @@ $ mvn clean test
 
 
 ####How To Run
+In order to create fat jar:
+```
+$ mvn clean package
+```
 
-Run the shell script **run.sh** via:
+Then, run the shell script **run.sh** via:
 
 ```
 $ ./run.sh

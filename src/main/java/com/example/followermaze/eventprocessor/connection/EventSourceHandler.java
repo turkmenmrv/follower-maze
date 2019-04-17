@@ -26,7 +26,6 @@ public class EventSourceHandler implements ISocketHandler {
 
       char[] c = new char[Utils.getReadBufferSize()];
 
-      //in.mark(31);
       int size = in.read(c);
 
 
@@ -35,12 +34,6 @@ public class EventSourceHandler implements ISocketHandler {
       String remainingPrev = "";
 
       while (size != -1) {
-        logger.info("SIZE :" + size + "***");
-        Stream.of(c).forEach(ch -> logger.info(String.valueOf(ch)));
-        logger.info("---");
-
-
-
         String[] parts = splitToParts(chunk);
         begin = parts[0];
         consumer.accept(remainingPrev + begin);
